@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Smitair3.Data;
 using Smitair3.Models;
 using Smitair3.Services;
+using SmitairDOTNET.DAL;
 
 namespace Smitair3
 {
@@ -26,8 +27,11 @@ namespace Smitair3
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SmitairDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

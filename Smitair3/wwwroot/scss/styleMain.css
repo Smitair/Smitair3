@@ -1,0 +1,103 @@
+body {
+  background-color: orange;
+  width: 100%;
+  min-width: 480px;
+  height: 0px; }
+
+.upper {
+  background-color: #2D2E28;
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  position: relative;
+  z-index: 1;
+  /*.language{
+      position: absolute;
+      right: 70px;
+  }
+  .dropdown{
+      position: absolute;
+      right: 10px;
+  }
+  #login-dp{
+      min-width: 270px;
+      padding: 14px 14px 0;
+      overflow: hidden;
+      background-color: rgba($login_color,.8);
+      .bottom{
+          background-color: $login_color;
+          padding:14px;
+      }
+      .form-group{
+          margin-bottom: 10px;
+      }
+  }*/ }
+  .upper .logo {
+    position: absolute;
+    left: 50%; }
+    .upper .logo img {
+      position: relative;
+      left: -50%;
+      width: 152px;
+      height: 50px; }
+  .upper .nav.navbar-nav.navbar-right li {
+    height: 50px;
+    color: #ff0000; }
+
+.carousel {
+  width: 100%;
+  max-height: 100vh;
+  margin-top: -25px;
+  margin-bottom: 25px; }
+  .carousel .carousel-indicators {
+    margin-bottom: 25px; }
+  .carousel .carousel-control {
+    padding-top: 25px;
+    padding-bottom: 25px; }
+
+.navparent {
+  position: relative;
+  z-index: 100;
+  top: -50px;
+  width: 100%; }
+  .navparent .navbar {
+    position: absolute;
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    width: 100%; }
+
+.sections {
+  position: relative; }
+  .sections #section1 {
+    padding-top: 50px;
+    height: 500px;
+    color: #fff;
+    background-color: #1E88E5; }
+  .sections #section2 {
+    padding-top: 50px;
+    height: 500px;
+    color: #fff;
+    background-color: #673ab7; }
+  .sections #section3 {
+    padding-top: 50px;
+    height: 500px;
+    color: #fff;
+    background-color: #ff9800; }
+  .sections #section4 {
+    padding-top: 50px;
+    height: 500px;
+    color: #fff;
+    background-color: #1E88E5; }
+  .sections #section5 {
+    padding-top: 50px;
+    height: 500px;
+    color: #fff;
+    background-color: #673ab7; }
+
+.footer {
+  position: relative;
+  background-color: #2D2E28;
+  color: #FFFFFF;
+  height: 50px; }
+
+/*# sourceMappingURL=styleMain.css.map */

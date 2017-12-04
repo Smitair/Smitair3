@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Smitair3.Models;
 using Smitair3.Models.AccountViewModels;
 using Smitair3.Services;
+using SmitairDOTNET.Controllers;
 
 namespace Smitair3.Controllers
 {

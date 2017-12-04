@@ -1,0 +1,119 @@
+﻿@model SmitairDOTNET.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <title>Create Account</title>
+</head>
+<body>
+    <div class="container text-center text-center">
+        <center><h2>Registration</h2></center>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <form asp-action="Create" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!-- Nick -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nick</label>
+                        <div class="col-sm-4">
+                            <input asp-for="Username" class="form-control" placeholder="Username" />
+                        </div>
+                        <span asp-validation-for="Username" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- First Name -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">First Name</label>
+                        <div class="col-sm-4">
+                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        </div>
+                        <span asp-validation-for="FirstName" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Last Name</label>
+                        <div class="col-sm-4">
+                            <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                        </div>
+                        <span asp-validation-for="LastName" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Email Adress -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Email Adress</label>
+                        <div class="col-sm-4">
+                            <input asp-for="EmailAdress" class="form-control" placeholder="Email Adress" />
+                        </div>
+                        <span asp-validation-for="EmailAdress" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Confirm Email Adress -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Email Adress</label>
+                        <div class="col-sm-4">
+                            <input asp-for="ConfirmEmailAdress" class="form-control" placeholder="Email Adress" />
+                        </div>
+                        <span asp-validation-for="ConfirmEmailAdress" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Password</label>
+                        <div class="col-sm-4">
+                            <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
+                        </div>
+                        <span asp-validation-for="Password" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Confirm password</label>
+                        <div class="col-sm-4">
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm" type="password" />
+                        </div>
+                        <span asp-validation-for="ConfirmPassword" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Avatar link -->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Avatar link</label>
+                        <div class="col-sm-4">
+                            <label class="btn btn-info">
+                                Browse image
+                                @*asp-for="AvatarLink type="file""*@
+                                @*style="display: none"*@
+                                <input type="file" name="file" id="file" accept="image/*" />
+                            </label>
+                        </div>
+                        <span asp-validation-for="AvatarLink" class="col-sm-4 text-danger text-left"></span>
+                    </div>
+
+                    <!-- Create button -->
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-info" />
+                    </div>
+
+                    <!-- List button -->
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-info">User's List</a>
+                    </div>
+
+                    <!-- Main Page button -->
+                    <div class="form-group">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to main page</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
