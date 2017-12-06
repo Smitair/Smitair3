@@ -3,12 +3,40 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace Smitair3.Migrations
+namespace Smitair3.Migrations.SmitairDb
 {
-    public partial class Init : Migration
+    public partial class InitialSmi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplicationUser",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    AvatarLink = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationUser", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
@@ -25,24 +53,6 @@ namespace Smitair3.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AvatarLink = table.Column<string>(nullable: true),
-                    EmailAdress = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    Username = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Effects",
                 columns: table => new
                 {
@@ -54,17 +64,17 @@ namespace Smitair3.Migrations
                     Description = table.Column<string>(nullable: true),
                     EffectLink = table.Column<string>(nullable: true),
                     EffectName = table.Column<string>(nullable: true),
-                    UserID = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
                     YoutubeLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Effects", x => x.EffectID);
                     table.ForeignKey(
-                        name: "FK_Effects_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
+                        name: "FK_Effects_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "ApplicationUser",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -76,7 +86,7 @@ namespace Smitair3.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EffectID = table.Column<int>(nullable: true),
                     Grade = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,17 +98,17 @@ namespace Smitair3.Migrations
                         principalColumn: "EffectID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Purchases_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "ID",
+                        name: "FK_Purchases_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "ApplicationUser",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Effects_UserID",
+                name: "IX_Effects_UserId",
                 table: "Effects",
-                column: "UserID");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Purchases_EffectID",
@@ -106,9 +116,9 @@ namespace Smitair3.Migrations
                 column: "EffectID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchases_UserID",
+                name: "IX_Purchases_UserId",
                 table: "Purchases",
-                column: "UserID");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -123,7 +133,7 @@ namespace Smitair3.Migrations
                 name: "Effects");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "ApplicationUser");
         }
     }
 }

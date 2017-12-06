@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Smitair3.Data;
+using Smitair3.Models;
 using SmitairDOTNET.DAL;
 using SmitairDOTNET.Models;
 using System.IO;
@@ -14,23 +17,32 @@ namespace SmitairDOTNET.Controllers
     {
         private readonly SmitairDbContext _context;
         private readonly IHostingEnvironment _hosting;
-        public static User dataUser;
+        public static ApplicationUser dataUser;
         public static Effect effects;
         public static Purchase purchases;
         public static bool purchased;
 
-        public PanelController(SmitairDbContext context, IHostingEnvironment hosting)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        private ApplicationDbContext _appdbcontext;
+
+        public PanelController(SmitairDbContext context, IHostingEnvironment hosting,
+            ApplicationDbContext appdbcontext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _hosting = hosting;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _appdbcontext = appdbcontext;
         }
 
         private void layout()
         {
-            ViewBag.FirstName = dataUser.FirstName;
-            ViewBag.EmailAdress = dataUser.EmailAdress;
-            ViewBag.AvatarLink = dataUser.AvatarLink;
-            ViewBag.LastName = dataUser.LastName;
+            //ViewBag.FirstName = dataUser.FirstName;
+            //ViewBag.EmailAdress = dataUser.Email;
+            //ViewBag.AvatarLink = dataUser.AvatarLink;
+            //ViewBag.LastName = dataUser.LastName;
         }
 
         // GET: Panel
@@ -47,13 +59,13 @@ namespace SmitairDOTNET.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(User objUser)
+        public IActionResult Index(ApplicationUser objUser)
         {
             bool findedUser = false;
             //public var dataUser = objUser;
-            foreach (User user in _context.Users)
+            foreach (ApplicationUser user in _userManager.Users)
             {
-                if (user.Username == objUser.Username && user.Password == objUser.Password)
+                if (user.UserName == objUser.UserName && user.PasswordHash == objUser.PasswordHash)
                 {
                     findedUser = true;
                     dataUser = user;
@@ -84,10 +96,10 @@ namespace SmitairDOTNET.Controllers
         {
             layout();
 
-            ViewData["User"] = dataUser.Username;
+            ViewData["User"] = dataUser.UserName;
             ViewData["FirstName"] = dataUser.FirstName;
             ViewData["LastName"] = dataUser.LastName;
-            ViewData["EmailAdress"] = dataUser.EmailAdress;
+            ViewData["EmailAdress"] = dataUser.Email;
 
             return View(dataUser);
         }
@@ -133,13 +145,13 @@ namespace SmitairDOTNET.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind("ID,User,Password,FirstName,LastName,AvatarLink,EmailAdress")] User users)
+        public ActionResult Edit([Bind("ID,User,Password,FirstName,LastName,AvatarLink,EmailAdress")] ApplicationUser users)
         {
             //change editing profile foto
 
             dataUser.FirstName = users.FirstName;
             dataUser.LastName = users.LastName;
-            dataUser.EmailAdress = users.EmailAdress;
+            dataUser.Email = users.Email;
             _context.Update(dataUser);
             _context.SaveChanges();
             return RedirectToAction("MyAccount");
@@ -169,11 +181,9 @@ namespace SmitairDOTNET.Controllers
                     effect.EffectLink = "/hosting/Effects/" + effect.EffectID + ".smi";
                 }
 
-                effect.AuthorID = dataUser.ID;
-
                 effect.YoutubeLink = effect.YoutubeLink.Replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/") + "?ecver=2";
 
-                effect.User = _context.Users.Where(user => user.ID == dataUser.ID).Single();
+                effect.User = _userManager.Users.Where(user => user.Id == dataUser.Id).Single();
 
                 _context.Effects.Add(effect);
 
@@ -233,7 +243,7 @@ namespace SmitairDOTNET.Controllers
                 //purchases.EffectID = purchase.EffectID;
                 //purchases.UserID = dataUser.ID;
                 purchases.Effect = _context.Effects.Where(effect => effect.EffectID == idd).Single();
-                purchases.User = _context.Users.Where(user => user.ID == dataUser.ID).Single();
+                purchases.User = _userManager.Users.Where(user => user.Id == dataUser.Id).Single();
 
                 _context.Add(purchases);
                 _context.SaveChanges();

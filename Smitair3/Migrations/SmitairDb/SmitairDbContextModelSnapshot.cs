@@ -8,18 +8,63 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SmitairDOTNET.DAL;
 using System;
 
-namespace Smitair3.Migrations
+namespace Smitair3.Migrations.SmitairDb
 {
     [DbContext(typeof(SmitairDbContext))]
-    [Migration("20171204080708_Init")]
-    partial class Init
+    partial class SmitairDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Smitair3.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("AvatarLink");
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail");
+
+                    b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
 
             modelBuilder.Entity("SmitairDOTNET.Models.Comment", b =>
                 {
@@ -54,13 +99,13 @@ namespace Smitair3.Migrations
 
                     b.Property<string>("EffectName");
 
-                    b.Property<int?>("UserID");
+                    b.Property<string>("UserId");
 
                     b.Property<string>("YoutubeLink");
 
                     b.HasKey("EffectID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Effects");
                 });
@@ -74,49 +119,22 @@ namespace Smitair3.Migrations
 
                     b.Property<int>("Grade");
 
-                    b.Property<int?>("UserID");
+                    b.Property<string>("UserId");
 
                     b.HasKey("ID");
 
                     b.HasIndex("EffectID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Purchases");
                 });
 
-            modelBuilder.Entity("SmitairDOTNET.Models.User", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AvatarLink");
-
-                    b.Property<string>("EmailAdress")
-                        .IsRequired();
-
-                    b.Property<string>("FirstName")
-                        .IsRequired();
-
-                    b.Property<string>("LastName")
-                        .IsRequired();
-
-                    b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("Username")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("SmitairDOTNET.Models.Effect", b =>
                 {
-                    b.HasOne("SmitairDOTNET.Models.User", "User")
+                    b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("SmitairDOTNET.Models.Purchase", b =>
@@ -125,9 +143,9 @@ namespace Smitair3.Migrations
                         .WithMany()
                         .HasForeignKey("EffectID");
 
-                    b.HasOne("SmitairDOTNET.Models.User", "User")
+                    b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

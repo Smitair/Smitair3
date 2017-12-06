@@ -1,65 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Smitair</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Systems of Music Instruments Technology">
+    <meta name="author" content="Marcin Horczak & Dawid Nowak">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/scss/styleLayout.css" />
+    <link rel="stylesheet" href="~/scss/style.css" />
 </head>
 <body>
     <div class="upper">
         <div class="logo">
             <img src="~/images/logo.svg">
         </div>
-        @*<div class="language">
-                <a href="">PL</a>|
-                <a href="">EN</a>
-            </div>*@
-        @*<div class="logout">
-                <a href="">Logout</a>
-            </div>*@
-        @*<div class="mail">
-                <img src="@ViewBag.AvatarLink" class="avatar" />
-                Hello @ViewBag.FirstName! (@ViewBag.EmailAdress)&nbsp;&nbsp;
-                <a asp-controller="Home" asp-action="Index" data-toggle="tooltip" title="Log out"><span class="glyphicon glyphicon-log-out" style="color: #FFFFFF; font-size:13px;"></span></a>
-                &nbsp;
-            </div>*@
-        <div class="text-right">
-            @await Html.PartialAsync("_LoginPartial")
-        </div>
+        @await Html.PartialAsync("_LoginPartial")
     </div>
 
+    @*@await Html.PartialAsync("_MenuPartial")*@
 
-    <div class="rows">
-        <div class="container-fluid">
-            <div class="row content">
-                <div class="col-sm-3">
-                    @* Change: ststic left column *@
-                    <ul class="list-group">
-                        <a asp-controller="Panel" asp-action="MyAccount"><li class="list-group-item"><span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> My Account</li></a>
-                        <a asp-controller="Panel" asp-action="Library"><li class="list-group-item"><span class="glyphicon glyphicon-book" style="color: #FFFFFF"></span> Library</li></a>
-                        <a asp-controller="Panel" asp-action="Shop"><li class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" style="color: #FFFFFF"></span> Shop</li></a>
-                        <a asp-controller="Panel" asp-action="AddEffect"><li class="list-group-item"><span class="glyphicon glyphicon-plus" style="color: #FFFFFF"></span> Add Effect</li></a>
-                        <a asp-controller="Panel" asp-action="Settings"><li class="list-group-item"><span class="glyphicon glyphicon-cog" style="color: #FFFFFF"></span> Settings</li></a>
-                        <a asp-controller="Home" asp-action="Index"><li class="list-group-item"><span class="glyphicon glyphicon-off" style="color: #FFFFFF"></span> Logout</li></a>
-                    </ul>
-                </div>
-                <div class="col-sm-9">
-                    <div class="container body-content">
-                        @RenderBody()
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer class="container-fluid text-center">
-            <p>&copy; 2017 - SmitairDOTNET</p>
-        </footer>
-    </div>
+    @RenderBody()
 
 
+
+
+    <footer class="container-fluid text-center">
+        <p>&copy; 2017 - SmitairDOTNET</p>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Smitair3.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,6 @@ namespace SmitairDOTNET.Models
         public string YoutubeLink { get; set; }
         public string EffectLink { get; set; }
         public string Description { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

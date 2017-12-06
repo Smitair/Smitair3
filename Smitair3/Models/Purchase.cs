@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Smitair3.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmitairDOTNET.Models
 {
@@ -6,7 +7,7 @@ namespace SmitairDOTNET.Models
     {
         [Key]
         public int ID { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public Effect Effect { get; set; }
         public int Grade { get; set; }
     }

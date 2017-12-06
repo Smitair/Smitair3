@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Smitair3.Data;
 using System;
 
-namespace Smitair3.Data.Migrations
+namespace Smitair3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171204080821_Init")]
-    partial class Init
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,6 +135,8 @@ namespace Smitair3.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("AvatarLink");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -143,6 +144,12 @@ namespace Smitair3.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 

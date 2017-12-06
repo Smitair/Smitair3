@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Smitair3.Models;
+using SmitairDOTNET.DAL;
 
 namespace Smitair3.Data
 {
@@ -21,6 +22,11 @@ namespace Smitair3.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+        }
+
+        public static implicit operator ApplicationDbContext(SmitairDbContext v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

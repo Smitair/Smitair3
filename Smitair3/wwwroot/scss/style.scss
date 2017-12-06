@@ -1,10 +1,13 @@
-﻿$background_color: #b6b6b6;
+$upper_color: #4D2E28;
+$login_color: #FFFFFF;
+$menu_height: 50px;
+$menu_height_div2: $menu_height/2;
+$background_color: #b6b6b6;
 $upper_color: #2D2E28;
 $login_color: #FFFFFF;
 $left_color: #808080;
 $right_color: $left_color;
-$menu_height: 50px;
-$row_height: /*calc(100vh - 100px)*/ 100%;
+$row_height: 100%;
 $hovercolor: #E96E00;
 
 body {
@@ -25,9 +28,8 @@ a:hover, a:visited, a:link, a:active {
     text-align: center;
     width: 100%;
     height: $menu_height;
-    position: fixed;
+    position: relative;
     z-index: 1;
-    top: 0px;
 
     .logo {
         position: absolute;
@@ -40,37 +42,110 @@ a:hover, a:visited, a:link, a:active {
             height: 50px;
         }
     }
-    /*.language {
-        position: absolute;
-        right: 70px;
+
+    .nav.navbar-nav.navbar-right li {
+        height: $menu_height;
+        color: #ff0000;
     }
 
-    .logout {
-        position: absolute;
-        right: 15px;
-    }*/
-    .mail {
-        position: absolute;
-        right: 5px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 10px;
-        text-align: left;
-        color: #FFFFFF;
-        font-size: 10px;
+    .avatar {
+        right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 30px;
+        width: 30px;
+        border-radius: 20px;
+    }
+}
 
-        .avatar {
-            right: 10px;
-            margin-left: 5px;
-            margin-right: 5px;
-            height: 30px;
-            width: 30px;
-            border-radius: 20px;
-        }
+.nav {
+    margin-right: 30px;
+}
+
+span {
+    color: #FFFFFF;
+}
+
+li {
+    color: #FFFFFF;
+}
+
+li:hover {
+    background-color: #FFFFFF;
+    span {
+        color: #E96E00;
     }
 }
 
 
+.carousel {
+    width: 100%;
+    max-height: 100vh;
+    margin-top: -$menu_height_div2;
+    margin-bottom: $menu_height_div2;
+
+    .carousel-indicators {
+        margin-bottom: $menu_height_div2;
+    }
+
+    .carousel-control {
+        padding-top: $menu_height_div2;
+        padding-bottom: $menu_height_div2;
+    }
+}
+
+.navparent {
+    position: relative;
+    z-index: 100;
+    top: -$menu_height;
+    width: 100%;
+
+    .navbar {
+        position: absolute;
+        margin-bottom: 0px;
+        border-bottom: 0px;
+        width: 100%;
+    }
+}
+
+.sections {
+    position: relative;
+
+    #section1 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #1E88E5;
+    }
+
+    #section2 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #673ab7;
+    }
+
+    #section3 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #ff9800;
+    }
+
+    #section4 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #1E88E5;
+    }
+
+    #section5 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #673ab7;
+    }
+}
 
 .container-fluid {
     display: table;
@@ -111,23 +186,19 @@ a:hover, a:visited, a:link, a:active {
                     border-radius: 20px;
                 }
             }
-            /*.btn.btn-group-vertical {
-                width: 100%;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-                
-            }*/
+
             .list-group {
                 border-radius: 0px;
                 margin-left: 10px;
                 color: #FFFFFF;
-                .list-group-item{
+
+                .list-group-item {
                     border-radius: 0px;
-                    border:0px;
+                    border: 0px;
                     background-color: $right_color;
                 }
-                .list-group-item:hover{
+
+                .list-group-item:hover {
                     background-color: $hovercolor;
                 }
             }
@@ -139,8 +210,6 @@ a:hover, a:visited, a:link, a:active {
             height: $row_height;
             max-height: inherit;
             padding: 0px;
-            /*border-radius: 10px;
-            margin-bottom: $menu_height + 10px;*/
             text-align: left;
 
             table tr th {
@@ -148,13 +217,12 @@ a:hover, a:visited, a:link, a:active {
             }
         }
     }
+}
 
-    footer {
-        background-color: $upper_color;
-        color: white;
-        height: $menu_height;
-        width: 100%;
-        position: fixed;
-        bottom: 0px;
-    }
+footer {
+    background-color: $upper_color;
+    color: white;
+    height: $menu_height;
+    width: 100%;
+    bottom: 0px;
 }

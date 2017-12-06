@@ -1,0 +1,22 @@
+﻿<div class="rows">
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-3">
+                @* Change: ststic left column *@
+                <ul class="list-group">
+                    <a asp-controller="Panel" asp-action="MyAccount"><li class="list-group-item"><span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> My Account</li></a>
+                    <a asp-controller="Panel" asp-action="Library"><li class="list-group-item"><span class="glyphicon glyphicon-book" style="color: #FFFFFF"></span> Library</li></a>
+                    <a asp-controller="Panel" asp-action="Shop"><li class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" style="color: #FFFFFF"></span> Shop</li></a>
+                    <a asp-controller="Panel" asp-action="AddEffect"><li class="list-group-item"><span class="glyphicon glyphicon-plus" style="color: #FFFFFF"></span> Add Effect</li></a>
+                    <a asp-controller="Panel" asp-action="Settings"><li class="list-group-item"><span class="glyphicon glyphicon-cog" style="color: #FFFFFF"></span> Settings</li></a>
+                    <a asp-controller="Home" asp-action="Index"><li class="list-group-item"><span class="glyphicon glyphicon-off" style="color: #FFFFFF"></span> Logout</li></a>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <div class="container body-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
