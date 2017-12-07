@@ -34,12 +34,12 @@ namespace Smitair3
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-            {
-                //config.SignIn.RequireConfirmedEmail = true;
-            })
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+    //        services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+    //        {
+    //            config.SignIn.RequireConfirmedEmail = true;
+    //        })
+    //.AddEntityFrameworkStores<ApplicationDbContext>()
+    //.AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
