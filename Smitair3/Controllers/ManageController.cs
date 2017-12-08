@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Smitair3.Models;
 using Smitair3.Models.ManageViewModels;
 using Smitair3.Services;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Smitair3.Controllers
 {
@@ -42,6 +43,11 @@ namespace Smitair3.Controllers
             _urlEncoder = urlEncoder;
         }
 
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            ViewBag.Panel = 1;
+        }
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -59,6 +65,9 @@ namespace Smitair3.Controllers
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -100,6 +109,11 @@ namespace Smitair3.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+
+            await _userManager.UpdateAsync(user);
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

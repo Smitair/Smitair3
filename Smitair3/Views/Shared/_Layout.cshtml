@@ -18,15 +18,29 @@
         @await Html.PartialAsync("_LoginPartial")
     </div>
 
-    @*@await Html.PartialAsync("_MenuPartial")*@
-
-    @RenderBody()
-
-
+    @if (ViewBag.Panel == 1)
+    {
+        <div class="rows">
+            <div class="container-fluid">
+                <div class="row content">
+                    @await Html.PartialAsync("_MenuPartial")
+                    <div class="col-sm-9">
+                        <div class="container body-content">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
 
 
     <footer class="container-fluid text-center">
-        <p>&copy; 2017 - SmitairDOTNET</p>
+    <p>&copy; 2017 - SmitairDOTNET</p>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>

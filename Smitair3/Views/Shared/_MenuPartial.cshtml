@@ -1,22 +1,37 @@
-﻿<div class="rows">
-    <div class="container-fluid">
-        <div class="row content">
-            <div class="col-sm-3">
-                @* Change: ststic left column *@
-                <ul class="list-group">
-                    <a asp-controller="Panel" asp-action="MyAccount"><li class="list-group-item"><span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> My Account</li></a>
-                    <a asp-controller="Panel" asp-action="Library"><li class="list-group-item"><span class="glyphicon glyphicon-book" style="color: #FFFFFF"></span> Library</li></a>
-                    <a asp-controller="Panel" asp-action="Shop"><li class="list-group-item"><span class="glyphicon glyphicon-shopping-cart" style="color: #FFFFFF"></span> Shop</li></a>
-                    <a asp-controller="Panel" asp-action="AddEffect"><li class="list-group-item"><span class="glyphicon glyphicon-plus" style="color: #FFFFFF"></span> Add Effect</li></a>
-                    <a asp-controller="Panel" asp-action="Settings"><li class="list-group-item"><span class="glyphicon glyphicon-cog" style="color: #FFFFFF"></span> Settings</li></a>
-                    <a asp-controller="Home" asp-action="Index"><li class="list-group-item"><span class="glyphicon glyphicon-off" style="color: #FFFFFF"></span> Logout</li></a>
-                </ul>
-            </div>
-            <div class="col-sm-9">
-                <div class="container body-content">
-                    @RenderBody()
-                </div>
-            </div>
+﻿@using Smitair3.Views.Manage
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<div class="col-sm-3">
+
+    <ul class="list-group">
+        <li class="@ManageNavPages.IndexNavClass(ViewContext) list-group-item"><a asp-action="Index"><span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> My Account</a></li>
+        @*<li class="list-group-item"><a asp-controller="Panel" asp-action="MyAccount"><span class="glyphicon glyphicon-user" style="color: #FFFFFF"></span> My Account</a></li>*@
+        <li class="list-group-item"><a asp-controller="Panel" asp-action="Library"><span class="glyphicon glyphicon-book" style="color: #FFFFFF"></span> Library</a></li>
+        <li class="list-group-item"><a asp-controller="Panel" asp-action="Shop"><span class="glyphicon glyphicon-shopping-cart" style="color: #FFFFFF"></span> Shop</a></li>
+        <li class="list-group-item"><a asp-controller="Panel" asp-action="AddEffect"><span class="glyphicon glyphicon-plus" style="color: #FFFFFF"></span> Add Effect</a></li>
+    </ul>
+
+    <div class="panel-group">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#collapse"><span class="glyphicon glyphicon-cog" style="color: #FFFFFF"></span> Settings</a>
+        </div>
+        <div id="collapse" class="panel-collapse collapse">
+
+            <div class="@ManageNavPages.ChangePasswordNavClass(ViewContext) panel-heading"><a asp-action="ChangePassword">- Change Password</a></div>
+            @if (hasExternalLogins)
+            {
+                <div class="@ManageNavPages.ExternalLoginsNavClass(ViewContext) panel-heading"><a asp-action="ExternalLogins">- External logins</a></div>
+            }
+            <div class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext) panel-heading"><a asp-action="TwoFactorAuthentication">- Two-factor authentication</a></div>
+
         </div>
     </div>
+
+    <ul class="list-group">
+        <li class="list-group-item"><a asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-off" style="color: #FFFFFF"></span> Logout</a></li>
+    </ul>
+
 </div>

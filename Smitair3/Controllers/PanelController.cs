@@ -43,6 +43,7 @@ namespace SmitairDOTNET.Controllers
             //ViewBag.EmailAdress = dataUser.Email;
             //ViewBag.AvatarLink = dataUser.AvatarLink;
             //ViewBag.LastName = dataUser.LastName;
+            ViewBag.Panel = 1;
         }
 
         // GET: Panel

@@ -5,10 +5,6 @@ body {
   height: 0px;
   overflow-x: hidden; }
 
-a:hover, a:visited, a:link, a:active {
-  text-decoration: none;
-  color: #FFFFFF; }
-
 .upper {
   background-color: #2D2E28;
   text-align: center;
@@ -34,20 +30,16 @@ a:hover, a:visited, a:link, a:active {
     height: 30px;
     width: 30px;
     border-radius: 20px; }
-
-.nav {
-  margin-right: 30px; }
-
-span {
-  color: #FFFFFF; }
-
-li {
-  color: #FFFFFF; }
-
-li:hover {
-  background-color: #FFFFFF; }
-  li:hover span {
-    color: #E96E00; }
+  .upper .nav {
+    margin-right: 30px; }
+  .upper span {
+    color: #FFFFFF; }
+  .upper li {
+    color: #FFFFFF; }
+  .upper li:hover {
+    background-color: #FFFFFF; }
+    .upper li:hover span {
+      color: #E96E00; }
 
 .carousel {
   width: 100%;
@@ -105,8 +97,12 @@ li:hover {
   width: 100%;
   padding: 0px; }
 
+.navparent .container-fluid li:hover {
+  background-color: #FFFFFF; }
+  .navparent .container-fluid li:hover a {
+    color: #E96E00; }
+
 .rows {
-  margin-top: 50px;
   height: 100vh;
   width: 100%; }
   .rows .navbar {
@@ -119,25 +115,19 @@ li:hover {
       height: 100vh;
       background-clip: content-box;
       padding: 0px; }
-      .rows .row.content .col-sm-3 .hello {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 10px;
-        text-align: left; }
-        .rows .row.content .col-sm-3 .hello .avatar {
-          margin-right: 5px;
-          height: 30px;
-          width: 30px;
-          border-radius: 20px; }
-      .rows .row.content .col-sm-3 .list-group {
+      .rows .row.content .col-sm-3 a:hover, .rows .row.content .col-sm-3 a:visited, .rows .row.content .col-sm-3 a:link, .rows .row.content .col-sm-3 a:active {
+        text-decoration: none;
+        color: #FFFFFF; }
+      .rows .row.content .col-sm-3 .list-group, .rows .row.content .col-sm-3 .panel-group {
         border-radius: 0px;
         margin-left: 10px;
+        margin-bottom: 0px;
         color: #FFFFFF; }
-        .rows .row.content .col-sm-3 .list-group .list-group-item {
+        .rows .row.content .col-sm-3 .list-group .list-group-item, .rows .row.content .col-sm-3 .list-group .panel-heading, .rows .row.content .col-sm-3 .panel-group .list-group-item, .rows .row.content .col-sm-3 .panel-group .panel-heading {
           border-radius: 0px;
           border: 0px;
           background-color: #808080; }
-        .rows .row.content .col-sm-3 .list-group .list-group-item:hover {
+        .rows .row.content .col-sm-3 .list-group .list-group-item:hover, .rows .row.content .col-sm-3 .list-group .panel-heading:hover, .rows .row.content .col-sm-3 .panel-group .list-group-item:hover, .rows .row.content .col-sm-3 .panel-group .panel-heading:hover {
           background-color: #E96E00; }
     .rows .row.content .col-sm-9 {
       background: #b6b6b6;

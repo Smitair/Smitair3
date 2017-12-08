@@ -21,6 +21,7 @@ namespace SmitairDOTNET.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.MainPage = 1;
             return View();
         }
 

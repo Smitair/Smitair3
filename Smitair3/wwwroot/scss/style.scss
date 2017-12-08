@@ -1,10 +1,7 @@
-$upper_color: #4D2E28;
-$login_color: #FFFFFF;
 $menu_height: 50px;
 $menu_height_div2: $menu_height/2;
 $background_color: #b6b6b6;
 $upper_color: #2D2E28;
-$login_color: #FFFFFF;
 $left_color: #808080;
 $right_color: $left_color;
 $row_height: 100%;
@@ -16,11 +13,6 @@ body {
     min-width: 480px;
     height: 0px;
     overflow-x: hidden;
-}
-
-a:hover, a:visited, a:link, a:active {
-    text-decoration: none;
-    color: #FFFFFF;
 }
 
 .upper {
@@ -56,24 +48,25 @@ a:hover, a:visited, a:link, a:active {
         width: 30px;
         border-radius: 20px;
     }
-}
 
-.nav {
-    margin-right: 30px;
-}
+    .nav {
+        margin-right: 30px;
+    }
 
-span {
-    color: #FFFFFF;
-}
-
-li {
-    color: #FFFFFF;
-}
-
-li:hover {
-    background-color: #FFFFFF;
     span {
-        color: #E96E00;
+        color: #FFFFFF;
+    }
+
+    li {
+        color: #FFFFFF;
+    }
+
+    li:hover {
+        background-color: #FFFFFF;
+
+        span {
+            color: #E96E00;
+        }
     }
 }
 
@@ -154,8 +147,18 @@ li:hover {
     padding: 0px;
 }
 
+.navparent{
+    .container-fluid{
+        li:hover{
+            background-color: #FFFFFF;
+            a{
+                color: $hovercolor;
+            }
+        }
+    }
+}
+
 .rows {
-    margin-top: $menu_height;
     height: 100vh;
     width: 100%;
 
@@ -173,32 +176,24 @@ li:hover {
             background-clip: content-box;
             padding: 0px;
 
-            .hello {
-                margin-top: 5px;
-                margin-bottom: 5px;
-                margin-left: 10px;
-                text-align: left;
-
-                .avatar {
-                    margin-right: 5px;
-                    height: 30px;
-                    width: 30px;
-                    border-radius: 20px;
-                }
+            a:hover, a:visited, a:link, a:active {
+                text-decoration: none;
+                color: #FFFFFF;
             }
 
-            .list-group {
+            .list-group, .panel-group {
                 border-radius: 0px;
                 margin-left: 10px;
+                margin-bottom: 0px;
                 color: #FFFFFF;
 
-                .list-group-item {
+                .list-group-item, .panel-heading {
                     border-radius: 0px;
                     border: 0px;
                     background-color: $right_color;
                 }
 
-                .list-group-item:hover {
+                .list-group-item:hover, .panel-heading:hover {
                     background-color: $hovercolor;
                 }
             }
