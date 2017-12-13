@@ -41,12 +41,6 @@ namespace SmitairDOTNET.Controllers
             ViewBag.Panel = 1;
         }
 
-        // GET: Panel/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         public ActionResult AddEffect()
         {
             return View();
