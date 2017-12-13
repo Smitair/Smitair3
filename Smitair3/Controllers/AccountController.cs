@@ -14,6 +14,7 @@ using Smitair3.Models;
 using Smitair3.Models.AccountViewModels;
 using Smitair3.Services;
 using SmitairDOTNET.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Smitair3.Controllers
 {
@@ -231,6 +232,8 @@ namespace Smitair3.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    user.AvatarLink = "/images/UserAvatar/Default.jpg";
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);

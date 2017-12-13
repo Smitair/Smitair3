@@ -38,6 +38,21 @@ body {
     .nav.navbar-nav.navbar-right li {
         height: $menu_height;
         color: #ff0000;
+
+        .user{
+            margin-top: 0px;
+            padding-top: 5px;
+            margin-bottom: 0px;
+            padding-bottom: 5px;
+        }
+
+        a {
+            text-align: left;
+        }
+
+        img {
+            margin-top: 9px;
+        }
     }
 
     .avatar {
@@ -53,7 +68,7 @@ body {
         margin-right: 30px;
     }
 
-    span {
+    .user, span {
         color: #FFFFFF;
     }
 
@@ -64,7 +79,7 @@ body {
     li:hover {
         background-color: #FFFFFF;
 
-        span {
+        .user {
             color: #E96E00;
         }
     }

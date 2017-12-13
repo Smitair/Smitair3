@@ -11,8 +11,8 @@ using System;
 namespace Smitair3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171206134751_Initial")]
-    partial class Initial
+    [Migration("20171213104553_InitialApp")]
+    partial class InitialApp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

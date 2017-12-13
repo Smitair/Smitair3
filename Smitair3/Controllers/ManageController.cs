@@ -14,6 +14,10 @@ using Smitair3.Models;
 using Smitair3.Models.ManageViewModels;
 using Smitair3.Services;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Security.Claims;
 
 namespace Smitair3.Controllers
 {
@@ -23,6 +27,7 @@ namespace Smitair3.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IHostingEnvironment _hosting;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
@@ -32,6 +37,7 @@ namespace Smitair3.Controllers
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
+          IHostingEnvironment hosting,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
@@ -39,6 +45,7 @@ namespace Smitair3.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _hosting = hosting;
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
@@ -77,7 +84,7 @@ namespace Smitair3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(IndexViewModel model)
+        public async Task<IActionResult> Index(IndexViewModel model, IFormFile file)
         {
             if (!ModelState.IsValid)
             {
@@ -108,6 +115,17 @@ namespace Smitair3.Controllers
                 {
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
+            }
+
+            var uploads = Path.Combine(_hosting.WebRootPath, "images\\UserAvatar\\" + user.UserName + ".jpg");
+            if (file != null && file.Length > 0)
+            {
+                using (FileStream fs = System.IO.File.Create(uploads))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+                user.AvatarLink = "/images/UserAvatar/" + user.UserName + ".jpg";
             }
 
             user.FirstName = model.FirstName;

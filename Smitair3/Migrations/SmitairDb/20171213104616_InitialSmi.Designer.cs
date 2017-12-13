@@ -11,7 +11,7 @@ using System;
 namespace Smitair3.Migrations.SmitairDb
 {
     [DbContext(typeof(SmitairDbContext))]
-    [Migration("20171206134900_InitialSmi")]
+    [Migration("20171213104616_InitialSmi")]
     partial class InitialSmi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace Smitair3.Migrations.SmitairDb
 
             modelBuilder.Entity("SmitairDOTNET.Models.Effect", b =>
                 {
-                    b.Property<int>("EffectID")
+                    b.Property<Guid>("EffectID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AuthorID");
@@ -113,18 +113,18 @@ namespace Smitair3.Migrations.SmitairDb
 
             modelBuilder.Entity("SmitairDOTNET.Models.Purchase", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("PurchaseID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("EffectID");
+                    b.Property<Guid?>("EffectId");
 
                     b.Property<int>("Grade");
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("ID");
+                    b.HasKey("PurchaseID");
 
-                    b.HasIndex("EffectID");
+                    b.HasIndex("EffectId");
 
                     b.HasIndex("UserId");
 
@@ -142,7 +142,7 @@ namespace Smitair3.Migrations.SmitairDb
                 {
                     b.HasOne("SmitairDOTNET.Models.Effect", "Effect")
                         .WithMany()
-                        .HasForeignKey("EffectID");
+                        .HasForeignKey("EffectId");
 
                     b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()

@@ -1,4 +1,6 @@
-﻿using Smitair3.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Smitair3.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +10,7 @@ namespace SmitairDOTNET.Models
     public class Effect
     {
         [Key]
-        public int EffectID { get; set; }
+        public Guid EffectID { get; set; }
 
         public string EffectName { get; set; }
         public int AuthorID { get; set; }
@@ -17,6 +19,8 @@ namespace SmitairDOTNET.Models
         public string YoutubeLink { get; set; }
         public string EffectLink { get; set; }
         public string Description { get; set; }
+
+        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
     }
 }

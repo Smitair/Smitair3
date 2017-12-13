@@ -23,6 +23,15 @@ body {
   .upper .nav.navbar-nav.navbar-right li {
     height: 50px;
     color: #ff0000; }
+    .upper .nav.navbar-nav.navbar-right li .user {
+      margin-top: 0px;
+      padding-top: 5px;
+      margin-bottom: 0px;
+      padding-bottom: 5px; }
+    .upper .nav.navbar-nav.navbar-right li a {
+      text-align: left; }
+    .upper .nav.navbar-nav.navbar-right li img {
+      margin-top: 9px; }
   .upper .avatar {
     right: 10px;
     margin-left: 5px;
@@ -32,13 +41,13 @@ body {
     border-radius: 20px; }
   .upper .nav {
     margin-right: 30px; }
-  .upper span {
+  .upper .user, .upper span {
     color: #FFFFFF; }
   .upper li {
     color: #FFFFFF; }
   .upper li:hover {
     background-color: #FFFFFF; }
-    .upper li:hover span {
+    .upper li:hover .user {
       color: #E96E00; }
 
 .carousel {

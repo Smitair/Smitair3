@@ -56,8 +56,7 @@ namespace Smitair3.Migrations.SmitairDb
                 name: "Effects",
                 columns: table => new
                 {
-                    EffectID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EffectID = table.Column<Guid>(nullable: false),
                     AuthorID = table.Column<int>(nullable: false),
                     AvgGrade = table.Column<double>(nullable: false),
                     CountGrade = table.Column<int>(nullable: false),
@@ -82,18 +81,17 @@ namespace Smitair3.Migrations.SmitairDb
                 name: "Purchases",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EffectID = table.Column<int>(nullable: true),
+                    PurchaseID = table.Column<Guid>(nullable: false),
+                    EffectId = table.Column<Guid>(nullable: true),
                     Grade = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purchases", x => x.ID);
+                    table.PrimaryKey("PK_Purchases", x => x.PurchaseID);
                     table.ForeignKey(
-                        name: "FK_Purchases_Effects_EffectID",
-                        column: x => x.EffectID,
+                        name: "FK_Purchases_Effects_EffectId",
+                        column: x => x.EffectId,
                         principalTable: "Effects",
                         principalColumn: "EffectID",
                         onDelete: ReferentialAction.Restrict);
@@ -111,9 +109,9 @@ namespace Smitair3.Migrations.SmitairDb
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchases_EffectID",
+                name: "IX_Purchases_EffectId",
                 table: "Purchases",
-                column: "EffectID");
+                column: "EffectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Purchases_UserId",
