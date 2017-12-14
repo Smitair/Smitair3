@@ -32,16 +32,17 @@
                 </div>
             </div>
         </div>
+        <footer style="position:fixed;height:calc(100vh-100px);">
+            <p>&copy;SmitairDOTNET - @DateTime.Now.Year</p>
+        </footer>
     }
     else
     {
         @RenderBody()
+        <footer>
+            <p>&copy;SmitairDOTNET - @DateTime.Now.Year</p>
+        </footer>
     }
-
-
-    <footer class="container-fluid text-center">
-    <p>&copy; 2017 - SmitairDOTNET</p>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

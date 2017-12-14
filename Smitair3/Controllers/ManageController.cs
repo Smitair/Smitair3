@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Security.Claims;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Smitair3.Controllers
 {
@@ -151,6 +153,20 @@ namespace Smitair3.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            ///////////////////////
+            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("smitairadmin@smitair.com", "TestMessage"),
+                Subject = "Hello World from the SendGrid CSharp SDK!",
+                PlainTextContent = "Hello, Email!",
+                HtmlContent = "<strong>Hello, Email!</strong>"
+            };
+            msg.AddTo(new EmailAddress("marcin.horczak737@gmail.com", "Test User"));
+            var response = await client.SendEmailAsync(msg);
+            ///////////////////
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);

@@ -174,7 +174,7 @@ body {
 }
 
 .rows {
-    height: 100vh;
+    height: 100%;
     width: 100%;
 
     .navbar {
@@ -187,9 +187,12 @@ body {
 
         .col-sm-3 {
             background: $left_color;
-            height: 100vh;
+            height: 100%;
             background-clip: content-box;
             padding: 0px;
+            position: relative;
+            top: -50px;
+            padding-top: 50px;
 
             a:hover, a:visited, a:link, a:active {
                 text-decoration: none;
@@ -220,6 +223,7 @@ body {
             height: $row_height;
             max-height: inherit;
             padding: 0px;
+            padding-bottom: $menu_height+10px;
             text-align: left;
 
             table tr th {
@@ -232,7 +236,14 @@ body {
 footer {
     background-color: $upper_color;
     color: white;
-    height: $menu_height;
+    height: $menu_height !important;
     width: 100%;
     bottom: 0px;
+    position:relative;
+    text-align: center;
+    z-index: 10 !important;
+
+    p {
+        padding-top: 15px;
+    }
 }

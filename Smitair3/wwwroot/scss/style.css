@@ -112,7 +112,7 @@ body {
     color: #E96E00; }
 
 .rows {
-  height: 100vh;
+  height: 100%;
   width: 100%; }
   .rows .navbar {
     margin-bottom: 0;
@@ -121,9 +121,12 @@ body {
     height: 100%; }
     .rows .row.content .col-sm-3 {
       background: #808080;
-      height: 100vh;
+      height: 100%;
       background-clip: content-box;
-      padding: 0px; }
+      padding: 0px;
+      position: relative;
+      top: -50px;
+      padding-top: 50px; }
       .rows .row.content .col-sm-3 a:hover, .rows .row.content .col-sm-3 a:visited, .rows .row.content .col-sm-3 a:link, .rows .row.content .col-sm-3 a:active {
         text-decoration: none;
         color: #FFFFFF; }
@@ -144,6 +147,7 @@ body {
       height: 100%;
       max-height: inherit;
       padding: 0px;
+      padding-bottom: 60px;
       text-align: left; }
       .rows .row.content .col-sm-9 table tr th {
         text-align: left; }
@@ -151,8 +155,13 @@ body {
 footer {
   background-color: #2D2E28;
   color: white;
-  height: 50px;
+  height: 50px !important;
   width: 100%;
-  bottom: 0px; }
+  bottom: 0px;
+  position: relative;
+  text-align: center;
+  z-index: 10 !important; }
+  footer p {
+    padding-top: 15px; }
 
 /*# sourceMappingURL=style.css.map */
