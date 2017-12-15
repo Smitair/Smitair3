@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\hosting\Effects\" />
+    <Folder Include="wwwroot\images\UserAvatar\" />
   </ItemGroup>
 
 </Project>

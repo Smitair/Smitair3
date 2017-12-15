@@ -155,7 +155,7 @@ namespace Smitair3.Controllers
             }
 
             ///////////////////////
-            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
+            var apiKey = "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";
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
