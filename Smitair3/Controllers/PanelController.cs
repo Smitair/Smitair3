@@ -58,6 +58,35 @@ namespace SmitairDOTNET.Controllers
                 _context.Effects.Add(effect);
                 _context.SaveChanges();
 
+                //            CloudStorageAccount storageAccount = new CloudStorageAccount(
+                //new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
+                //"smitair",
+                //"FOTb/jAUg9xet6Iwr1oEFGiQqcEC+7sxHAKGtTMFtEs3nYe1YveQaiG3eQiNVwJtIryjXPV56qFw+if7eV7M1w=="), true);
+
+                //            // Create a blob client.
+                //            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+                //            // Get a reference to a container named "my-new-container."
+                //            CloudBlobContainer container = blobClient.GetContainerReference("avatars");
+
+                //            // If "mycontainer" doesn't exist, create it.
+                //            await container.CreateIfNotExistsAsync();
+
+                //            await container.SetPermissionsAsync(new BlobContainerPermissions
+                //            {
+                //                PublicAccess = BlobContainerPublicAccessType.Blob
+                //            });
+
+                //            // Get a reference to a blob named "myblob".
+                //            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
+
+                //            // Create or overwrite the "myblob" blob with the contents of a local file
+                //            // named "myfile".
+                //            using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
+                //            {
+                //                await blockBlob.UploadFromStreamAsync(fileStream);
+                //            }
+
                 var uploads = Path.Combine(_hosting.WebRootPath,
                     "hosting\\Effects\\" + effect.EffectID + ".smi");
                 if (file != null && file.Length > 0)

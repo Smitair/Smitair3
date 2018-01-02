@@ -8,9 +8,14 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <img src="@UserManager.GetUserAsync(User).Result.AvatarLink" class="avatar" />
-            </li>
+            @if (UserManager.GetUserAsync(User).Result.AvatarLink != null)
+            {
+                <li>
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="user" style="padding:0px">
+                        <img src="@UserManager.GetUserAsync(User).Result.AvatarLink" class="avatar" />
+                    </a>
+                </li>
+            }
             <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="user">
                     <span>

@@ -79,7 +79,7 @@ body {
     li:hover {
         background-color: #FFFFFF;
 
-        .user {
+        span {
             color: #E96E00;
         }
     }
@@ -123,35 +123,84 @@ body {
         padding-top: 50px;
         height: 500px;
         color: #fff;
-        background-color: #1E88E5;
+        background-color: #b4b4b4;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
     }
 
     #section2 {
         padding-top: 50px;
         height: 500px;
         color: #fff;
-        background-color: #673ab7;
+        background-color: #6e6e6e;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
     }
 
     #section3 {
         padding-top: 50px;
         height: 500px;
         color: #fff;
-        background-color: #ff9800;
+        background-color: #b4b4b4;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
     }
 
     #section4 {
         padding-top: 50px;
         height: 500px;
         color: #fff;
-        background-color: #1E88E5;
+        background-color: #6e6e6e;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
     }
 
     #section5 {
         padding-top: 50px;
         height: 500px;
         color: #fff;
-        background-color: #673ab7;
+        background-color: #b4b4b4;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
+    }
+
+    #section6 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #6e6e6e;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
+    }
+
+    #section7 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #b4b4b4;
+        padding-left: 10px;
+
+        h1 {
+            color: #e96e00;
+        }
     }
 }
 
@@ -187,7 +236,7 @@ body {
 
         .col-sm-3 {
             background: $left_color;
-            height: 100%;
+            height: calc(100vh - 50px);
             background-clip: content-box;
             padding: 0px;
             position: relative;

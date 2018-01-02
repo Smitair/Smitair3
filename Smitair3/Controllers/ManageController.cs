@@ -155,17 +155,17 @@ namespace Smitair3.Controllers
             }
 
             ///////////////////////
-            var apiKey = "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";
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("smitairadmin@smitair.com", "TestMessage"),
-                Subject = "Hello World from the SendGrid CSharp SDK!",
-                PlainTextContent = "Hello, Email!",
-                HtmlContent = "<strong>Hello, Email!</strong>"
-            };
-            msg.AddTo(new EmailAddress("marcin.horczak737@gmail.com", "Test User"));
-            var response = await client.SendEmailAsync(msg);
+            //var apiKey = "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";
+            //var client = new SendGridClient(apiKey);
+            //var msg = new SendGridMessage()
+            //{
+            //    From = new EmailAddress("smitairadmin@smitair.com", "TestMessage"),
+            //    Subject = "Hello World from the SendGrid CSharp SDK!",
+            //    PlainTextContent = "Hello, Email!",
+            //    HtmlContent = "<strong>Hello, Email!</strong>"
+            //};
+            //msg.AddTo(new EmailAddress("marcin.horczak737@gmail.com", "Test User"));
+            //var response = await client.SendEmailAsync(msg);
             ///////////////////
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
