@@ -20,7 +20,7 @@ namespace SmitairDOTNET.Models
         public string EffectLink { get; set; }
         public string Description { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey("Id")]
         public ApplicationUser User { get; set; }
     }
 }

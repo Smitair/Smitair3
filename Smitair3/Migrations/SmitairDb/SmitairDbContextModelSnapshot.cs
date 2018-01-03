@@ -99,13 +99,13 @@ namespace Smitair3.Migrations.SmitairDb
 
                     b.Property<string>("EffectName");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("Id");
 
                     b.Property<string>("YoutubeLink");
 
                     b.HasKey("EffectID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Effects");
                 });
@@ -119,13 +119,13 @@ namespace Smitair3.Migrations.SmitairDb
 
                     b.Property<int>("Grade");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("Id");
 
                     b.HasKey("PurchaseID");
 
                     b.HasIndex("EffectId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Purchases");
                 });
@@ -134,7 +134,7 @@ namespace Smitair3.Migrations.SmitairDb
                 {
                     b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id");
                 });
 
             modelBuilder.Entity("SmitairDOTNET.Models.Purchase", b =>
@@ -145,7 +145,7 @@ namespace Smitair3.Migrations.SmitairDb
 
                     b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Id");
                 });
 #pragma warning restore 612, 618
         }

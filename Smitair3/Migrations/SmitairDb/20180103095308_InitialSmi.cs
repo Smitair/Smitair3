@@ -63,15 +63,15 @@ namespace Smitair3.Migrations.SmitairDb
                     Description = table.Column<string>(nullable: true),
                     EffectLink = table.Column<string>(nullable: true),
                     EffectName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: true),
                     YoutubeLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Effects", x => x.EffectID);
                     table.ForeignKey(
-                        name: "FK_Effects_ApplicationUser_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Effects_ApplicationUser_Id",
+                        column: x => x.Id,
                         principalTable: "ApplicationUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -84,7 +84,7 @@ namespace Smitair3.Migrations.SmitairDb
                     PurchaseID = table.Column<Guid>(nullable: false),
                     EffectId = table.Column<Guid>(nullable: true),
                     Grade = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,17 +96,17 @@ namespace Smitair3.Migrations.SmitairDb
                         principalColumn: "EffectID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Purchases_ApplicationUser_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Purchases_ApplicationUser_Id",
+                        column: x => x.Id,
                         principalTable: "ApplicationUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Effects_UserId",
+                name: "IX_Effects_Id",
                 table: "Effects",
-                column: "UserId");
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Purchases_EffectId",
@@ -114,9 +114,9 @@ namespace Smitair3.Migrations.SmitairDb
                 column: "EffectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchases_UserId",
+                name: "IX_Purchases_Id",
                 table: "Purchases",
-                column: "UserId");
+                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

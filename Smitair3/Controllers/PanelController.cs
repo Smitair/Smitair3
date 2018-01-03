@@ -53,7 +53,7 @@ namespace SmitairDOTNET.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.GetUserAsync(User);
+                var user = _userManager.GetUserId(User);
 
                 _context.Effects.Add(effect);
                 _context.SaveChanges();
@@ -87,6 +87,7 @@ namespace SmitairDOTNET.Controllers
                 //                await blockBlob.UploadFromStreamAsync(fileStream);
                 //            }
 
+
                 var uploads = Path.Combine(_hosting.WebRootPath,
                     "hosting\\Effects\\" + effect.EffectID + ".smi");
                 if (file != null && file.Length > 0)
@@ -101,10 +102,10 @@ namespace SmitairDOTNET.Controllers
 
                 effect.YoutubeLink = effect.YoutubeLink.Replace("https://www.youtube.com/watch?v=",
                     "https://www.youtube.com/embed/") + "?ecver=2";
-                effect.User = user;
+                effect.User = _userManager.Users.Where(us => us.Id == user).Single();
 
                 _context.Effects.Update(effect);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("AddEffect");
             }
@@ -160,7 +161,8 @@ namespace SmitairDOTNET.Controllers
                 _context.Purchases.Add(purchases);
                 _context.SaveChanges();
 
-                purchases.User = user;
+                //purchases.User = user;
+                purchases.User = _userManager.Users.Where(us => us.Id == user.Id).Single();
                 purchases.Effect = _context.Effects.Where(effect => effect.EffectID == idd).Single();
 
                 _context.Purchases.Update(purchases);
