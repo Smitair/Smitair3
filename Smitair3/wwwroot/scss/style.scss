@@ -1,7 +1,7 @@
 $menu_height: 50px;
 $menu_height_div2: $menu_height/2;
 $background_color: #b6b6b6;
-$upper_color: #2D2E28;
+$upper_color: #333333;
 $left_color: #808080;
 $right_color: $left_color;
 $row_height: 100%;
@@ -16,7 +16,6 @@ body {
 }
 
 .upper {
-    background-color: $upper_color;
     text-align: center;
     width: 100%;
     height: $menu_height;
@@ -124,10 +123,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #b4b4b4;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #6e6e6e;
         }
     }
 
@@ -136,10 +142,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #6e6e6e;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #b4b4b4;
         }
     }
 
@@ -148,10 +161,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #b4b4b4;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #6e6e6e;
         }
     }
 
@@ -160,10 +180,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #6e6e6e;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #b4b4b4;
         }
     }
 
@@ -172,10 +199,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #b4b4b4;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #6e6e6e;
         }
     }
 
@@ -184,10 +218,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #6e6e6e;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #b4b4b4;
         }
     }
 
@@ -196,10 +237,17 @@ body {
         height: 500px;
         color: #fff;
         background-color: #b4b4b4;
-        padding-left: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
 
         h1 {
-            color: #e96e00;
+            color: #222222;
+            font-size: 60px;
+        }
+
+        p {
+            font-size: 30px;
+            color: #6e6e6e;
         }
     }
 }

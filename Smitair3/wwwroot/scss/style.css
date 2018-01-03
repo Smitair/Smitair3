@@ -6,7 +6,6 @@ body {
   overflow-x: hidden; }
 
 .upper {
-  background-color: #2D2E28;
   text-align: center;
   width: 100%;
   height: 50px;
@@ -79,57 +78,92 @@ body {
     height: 500px;
     color: #fff;
     background-color: #b4b4b4;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section1 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section1 p {
+      font-size: 30px;
+      color: #6e6e6e; }
   .sections #section2 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #6e6e6e;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section2 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section2 p {
+      font-size: 30px;
+      color: #b4b4b4; }
   .sections #section3 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #b4b4b4;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section3 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section3 p {
+      font-size: 30px;
+      color: #6e6e6e; }
   .sections #section4 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #6e6e6e;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section4 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section4 p {
+      font-size: 30px;
+      color: #b4b4b4; }
   .sections #section5 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #b4b4b4;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section5 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section5 p {
+      font-size: 30px;
+      color: #6e6e6e; }
   .sections #section6 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #6e6e6e;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section6 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section6 p {
+      font-size: 30px;
+      color: #b4b4b4; }
   .sections #section7 {
     padding-top: 50px;
     height: 500px;
     color: #fff;
     background-color: #b4b4b4;
-    padding-left: 10px; }
+    padding-left: 30px;
+    padding-right: 30px; }
     .sections #section7 h1 {
-      color: #e96e00; }
+      color: #222222;
+      font-size: 60px; }
+    .sections #section7 p {
+      font-size: 30px;
+      color: #6e6e6e; }
 
 .container-fluid {
   display: table;
@@ -184,7 +218,7 @@ body {
         text-align: left; }
 
 footer {
-  background-color: #2D2E28;
+  background-color: #333333;
   color: white;
   height: 50px !important;
   width: 100%;
