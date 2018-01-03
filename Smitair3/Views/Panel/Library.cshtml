@@ -78,9 +78,6 @@
             <th>
                 Avg. Grade
             </th>
-            <th>
-                Download
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -96,9 +93,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Effect.AvgGrade)&nbsp;
                     (@Html.DisplayFor(modelItem => item.Effect.CountGrade))
-                </td>
-                <td>
-                    <a href="@Html.DisplayFor(modelItem => item.Effect.EffectLink)">Download Effect</a>
                 </td>
             </tr>
         }

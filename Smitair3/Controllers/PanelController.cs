@@ -160,9 +160,7 @@ namespace SmitairDOTNET.Controllers
                 _context.Purchases.Add(purchases);
                 _context.SaveChanges();
 
-                purchases.User.Id = user.Id;
                 purchases.User = user;
-
                 purchases.Effect = _context.Effects.Where(effect => effect.EffectID == idd).Single();
 
                 _context.Purchases.Update(purchases);

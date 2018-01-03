@@ -10,7 +10,7 @@ namespace SmitairDOTNET.Models
         [Key]
         public Guid PurchaseID { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
         [ForeignKey("EffectId")]

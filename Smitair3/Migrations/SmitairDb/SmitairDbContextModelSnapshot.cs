@@ -119,13 +119,13 @@ namespace Smitair3.Migrations.SmitairDb
 
                     b.Property<int>("Grade");
 
-                    b.Property<string>("Id");
+                    b.Property<string>("UserId");
 
                     b.HasKey("PurchaseID");
 
                     b.HasIndex("EffectId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Purchases");
                 });
@@ -145,7 +145,7 @@ namespace Smitair3.Migrations.SmitairDb
 
                     b.HasOne("Smitair3.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
