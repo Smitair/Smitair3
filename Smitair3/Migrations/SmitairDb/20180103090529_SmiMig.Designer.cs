@@ -11,9 +11,10 @@ using System;
 namespace Smitair3.Migrations.SmitairDb
 {
     [DbContext(typeof(SmitairDbContext))]
-    partial class SmitairDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180103090529_SmiMig")]
+    partial class SmiMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
