@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Smitair3.Migrations
 {
-    public partial class InitialApp : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +49,21 @@ namespace Smitair3.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentsID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AuthorID = table.Column<int>(nullable: false),
+                    EffectID = table.Column<int>(nullable: false),
+                    Text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentsID);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +172,57 @@ namespace Smitair3.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Effects",
+                columns: table => new
+                {
+                    EffectID = table.Column<Guid>(nullable: false),
+                    AuthorID = table.Column<int>(nullable: false),
+                    AvgGrade = table.Column<double>(nullable: false),
+                    CountGrade = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    EffectLink = table.Column<string>(nullable: true),
+                    EffectName = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: true),
+                    YoutubeLink = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Effects", x => x.EffectID);
+                    table.ForeignKey(
+                        name: "FK_Effects_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Purchases",
+                columns: table => new
+                {
+                    PurchaseID = table.Column<Guid>(nullable: false),
+                    EffectId = table.Column<Guid>(nullable: true),
+                    Grade = table.Column<int>(nullable: false),
+                    Id = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purchases", x => x.PurchaseID);
+                    table.ForeignKey(
+                        name: "FK_Purchases_Effects_EffectId",
+                        column: x => x.EffectId,
+                        principalTable: "Effects",
+                        principalColumn: "EffectID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Purchases_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -195,6 +261,21 @@ namespace Smitair3.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Effects_Id",
+                table: "Effects",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_EffectId",
+                table: "Purchases",
+                column: "EffectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_Id",
+                table: "Purchases",
+                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -215,7 +296,16 @@ namespace Smitair3.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Purchases");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Effects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

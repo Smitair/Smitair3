@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using Smitair3.Data;
 using Smitair3.Models;
-using SmitairDOTNET.DAL;
 using SmitairDOTNET.Models;
 using System;
 using System.IO;
@@ -18,7 +18,6 @@ namespace SmitairDOTNET.Controllers
     [Authorize]
     public class PanelController : Controller
     {
-        private readonly SmitairDbContext _context;
         private readonly IHostingEnvironment _hosting;
         public static Effect effects;
         public static Purchase purchases;
@@ -26,8 +25,9 @@ namespace SmitairDOTNET.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private ApplicationDbContext _context;
 
-        public PanelController(SmitairDbContext context, IHostingEnvironment hosting,
+        public PanelController(ApplicationDbContext context, IHostingEnvironment hosting,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
@@ -55,39 +55,6 @@ namespace SmitairDOTNET.Controllers
             {
                 var user = _userManager.GetUserId(User);
 
-                _context.Effects.Add(effect);
-                _context.SaveChanges();
-
-                //            CloudStorageAccount storageAccount = new CloudStorageAccount(
-                //new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-                //"smitair",
-                //"FOTb/jAUg9xet6Iwr1oEFGiQqcEC+7sxHAKGtTMFtEs3nYe1YveQaiG3eQiNVwJtIryjXPV56qFw+if7eV7M1w=="), true);
-
-                //            // Create a blob client.
-                //            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-                //            // Get a reference to a container named "my-new-container."
-                //            CloudBlobContainer container = blobClient.GetContainerReference("avatars");
-
-                //            // If "mycontainer" doesn't exist, create it.
-                //            await container.CreateIfNotExistsAsync();
-
-                //            await container.SetPermissionsAsync(new BlobContainerPermissions
-                //            {
-                //                PublicAccess = BlobContainerPublicAccessType.Blob
-                //            });
-
-                //            // Get a reference to a blob named "myblob".
-                //            CloudBlockBlob blockBlob = container.GetBlockBlobReference("myblob");
-
-                //            // Create or overwrite the "myblob" blob with the contents of a local file
-                //            // named "myfile".
-                //            using (var fileStream = System.IO.File.OpenRead(@"path\myfile"))
-                //            {
-                //                await blockBlob.UploadFromStreamAsync(fileStream);
-                //            }
-
-
                 var uploads = Path.Combine(_hosting.WebRootPath,
                     "hosting\\Effects\\" + effect.EffectID + ".smi");
                 if (file != null && file.Length > 0)
@@ -102,10 +69,11 @@ namespace SmitairDOTNET.Controllers
 
                 effect.YoutubeLink = effect.YoutubeLink.Replace("https://www.youtube.com/watch?v=",
                     "https://www.youtube.com/embed/") + "?ecver=2";
-                effect.User = _userManager.Users.Where(us => us.Id == user).Single();
 
-                _context.Effects.Update(effect);
-                await _context.SaveChangesAsync();
+                var loggedUser = _context.Users.Where(us => us.Id == user).Single();
+                effect.User = loggedUser;
+                _context.Effects.Add(effect);
+                _context.SaveChanges();
 
                 return RedirectToAction("AddEffect");
             }

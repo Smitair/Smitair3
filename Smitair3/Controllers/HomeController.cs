@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SmitairDOTNET.Models;
-using SmitairDOTNET.DAL;
+using Smitair3.Data;
 using Smitair3.Models;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Identity;
+using System.Diagnostics;
 
 namespace SmitairDOTNET.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly SmitairDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         public static bool loggedIn;
 
-        public HomeController(SmitairDbContext context, UserManager<ApplicationUser> userManager)
+        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

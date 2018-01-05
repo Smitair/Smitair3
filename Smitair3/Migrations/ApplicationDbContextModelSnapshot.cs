@@ -187,6 +187,70 @@ namespace Smitair3.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SmitairDOTNET.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentsID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AuthorID");
+
+                    b.Property<int>("EffectID");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("CommentsID");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("SmitairDOTNET.Models.Effect", b =>
+                {
+                    b.Property<Guid>("EffectID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AuthorID");
+
+                    b.Property<double>("AvgGrade");
+
+                    b.Property<int>("CountGrade");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("EffectLink");
+
+                    b.Property<string>("EffectName");
+
+                    b.Property<string>("Id");
+
+                    b.Property<string>("YoutubeLink");
+
+                    b.HasKey("EffectID");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Effects");
+                });
+
+            modelBuilder.Entity("SmitairDOTNET.Models.Purchase", b =>
+                {
+                    b.Property<Guid>("PurchaseID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("EffectId");
+
+                    b.Property<int>("Grade");
+
+                    b.Property<string>("Id");
+
+                    b.HasKey("PurchaseID");
+
+                    b.HasIndex("EffectId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Purchases");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -230,6 +294,24 @@ namespace Smitair3.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SmitairDOTNET.Models.Effect", b =>
+                {
+                    b.HasOne("Smitair3.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id");
+                });
+
+            modelBuilder.Entity("SmitairDOTNET.Models.Purchase", b =>
+                {
+                    b.HasOne("SmitairDOTNET.Models.Effect", "Effect")
+                        .WithMany()
+                        .HasForeignKey("EffectId");
+
+                    b.HasOne("Smitair3.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id");
                 });
 #pragma warning restore 612, 618
         }
