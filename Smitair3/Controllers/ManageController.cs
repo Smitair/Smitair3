@@ -119,7 +119,7 @@ namespace Smitair3.Controllers
                 }
             }
 
-            var uploads = Path.Combine(_hosting.WebRootPath, "images\\UserAvatar\\" + user.UserName + ".jpg");
+            var uploads = Path.Combine(_hosting.WebRootPath, "hosting\\UsersAvatars\\" + user.UserName + ".jpg");
             if (file != null && file.Length > 0)
             {
                 using (FileStream fs = System.IO.File.Create(uploads))
@@ -127,7 +127,7 @@ namespace Smitair3.Controllers
                     file.CopyTo(fs);
                     fs.Flush();
                 }
-                user.AvatarLink = "/images/UserAvatar/" + user.UserName + ".jpg";
+                user.AvatarLink = "/hosting/UsersAvatars/" + user.UserName + ".jpg";
             }
 
             user.FirstName = model.FirstName;
