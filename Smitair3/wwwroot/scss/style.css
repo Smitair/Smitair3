@@ -195,6 +195,11 @@ body {
       .rows .row.content .col-sm-3 a:hover, .rows .row.content .col-sm-3 a:visited, .rows .row.content .col-sm-3 a:link, .rows .row.content .col-sm-3 a:active {
         text-decoration: none;
         color: #FFFFFF; }
+      .rows .row.content .col-sm-3 button {
+        border: 0px;
+        background-color: #808080;
+        text-align: left;
+        padding: 0px; }
       .rows .row.content .col-sm-3 .list-group, .rows .row.content .col-sm-3 .panel-group {
         border-radius: 0px;
         margin-left: 10px;
@@ -206,6 +211,11 @@ body {
           background-color: #808080; }
         .rows .row.content .col-sm-3 .list-group .list-group-item:hover, .rows .row.content .col-sm-3 .list-group .panel-heading:hover, .rows .row.content .col-sm-3 .panel-group .list-group-item:hover, .rows .row.content .col-sm-3 .panel-group .panel-heading:hover {
           background-color: #E96E00; }
+          .rows .row.content .col-sm-3 .list-group .list-group-item:hover button, .rows .row.content .col-sm-3 .list-group .panel-heading:hover button, .rows .row.content .col-sm-3 .panel-group .list-group-item:hover button, .rows .row.content .col-sm-3 .panel-group .panel-heading:hover button {
+            border: 0px;
+            background-color: #E96E00;
+            text-align: left;
+            padding: 0px; }
     .rows .row.content .col-sm-9 {
       background: #b6b6b6;
       background-clip: content-box;

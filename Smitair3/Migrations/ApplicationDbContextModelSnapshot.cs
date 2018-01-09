@@ -218,6 +218,8 @@ namespace Smitair3.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("EffectCurrent");
+
                     b.Property<string>("EffectLink");
 
                     b.Property<string>("EffectName");
@@ -237,6 +239,8 @@ namespace Smitair3.Migrations
                 {
                     b.Property<Guid>("PurchaseID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Download");
 
                     b.Property<Guid?>("EffectId");
 

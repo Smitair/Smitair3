@@ -29,6 +29,7 @@ namespace Smitair3.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    AvatarCurrent = table.Column<string>(nullable: true),
                     AvatarLink = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -181,6 +182,7 @@ namespace Smitair3.Migrations
                     AvgGrade = table.Column<double>(nullable: false),
                     CountGrade = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    EffectCurrent = table.Column<string>(nullable: true),
                     EffectLink = table.Column<string>(nullable: true),
                     EffectName = table.Column<string>(nullable: true),
                     Id = table.Column<string>(nullable: true),
@@ -202,6 +204,7 @@ namespace Smitair3.Migrations
                 columns: table => new
                 {
                     PurchaseID = table.Column<Guid>(nullable: false),
+                    Download = table.Column<string>(nullable: true),
                     EffectId = table.Column<Guid>(nullable: true),
                     Grade = table.Column<int>(nullable: false),
                     Id = table.Column<string>(nullable: true)

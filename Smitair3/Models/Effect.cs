@@ -18,6 +18,7 @@ namespace SmitairDOTNET.Models
         public int CountGrade { get; set; }
         public string YoutubeLink { get; set; }
         public string EffectLink { get; set; }
+        public string EffectCurrent { get; set; }
         public string Description { get; set; }
 
         [ForeignKey("Id")]

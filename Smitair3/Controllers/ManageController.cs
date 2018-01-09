@@ -37,7 +37,7 @@ namespace Smitair3.Controllers
         private readonly ApplicationDbContext _context;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
-        ImageStore _store = new ImageStore();
+        FileStore _store = new FileStore();
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
@@ -68,7 +68,7 @@ namespace Smitair3.Controllers
                 if (user.AvatarLink != null)
                 {
                     string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
-                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                    user.AvatarCurrent = _store.UriForImage(avatarcurrent).ToString();
                 }
             }
         }
@@ -137,7 +137,8 @@ namespace Smitair3.Controllers
 
             if (file != null && file.Length > 0)
             {
-                var imageId = await _store.SaveImage(file.OpenReadStream());
+                var id = _userManager.GetUserId(User).ToString();
+                var imageId = await _store.SaveImage(file.OpenReadStream(),id);
                 user.AvatarLink = imageId;
             }
 
@@ -145,6 +146,7 @@ namespace Smitair3.Controllers
             user.LastName = model.LastName;
 
             await _userManager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

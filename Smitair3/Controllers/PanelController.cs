@@ -27,7 +27,7 @@ namespace SmitairDOTNET.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private ApplicationDbContext _context;
 
-        ImageStore _store = new ImageStore();
+        FileStore _store = new FileStore();
 
         public PanelController(ApplicationDbContext context, IHostingEnvironment hosting,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
@@ -49,7 +49,7 @@ namespace SmitairDOTNET.Controllers
                 if (user.AvatarLink != null)
                 {
                     string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
-                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                    user.AvatarCurrent = _store.UriForImage(avatarcurrent).ToString();
                 }
             }
         }
@@ -71,16 +71,11 @@ namespace SmitairDOTNET.Controllers
                 _context.Effects.Add(effect);
                 await _context.SaveChangesAsync();
 
-                var uploads = Path.Combine(_hosting.WebRootPath,
-                    "hosting\\Effects\\" + effect.EffectID + ".smi");
                 if (file != null && file.Length > 0)
                 {
-                    using (FileStream fs = System.IO.File.Create(uploads))
-                    {
-                        file.CopyTo(fs);
-                        fs.Flush();
-                    }
-                    effect.EffectLink = "/hosting/Effects/" + effect.EffectID + ".smi";
+                    var id = effect.EffectID.ToString();
+                    var effectId = await _store.SaveEffect(file.OpenReadStream(), id);
+                    effect.EffectLink = effectId;
                 }
 
                 effect.YoutubeLink = effect.YoutubeLink.Replace("https://www.youtube.com/watch?v=",
@@ -106,27 +101,7 @@ namespace SmitairDOTNET.Controllers
             return View(myPurchases);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Library(Guid? id, int? grade, Purchase purchase, FormCollection form)
-        {
-            var user = await _userManager.GetUserAsync(User);
-
-            if (id == null)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
-            else
-            {
-                purchase = _context.Purchases.Where(purch => purch.PurchaseID == id).Single();
-
-                _context.Update(purchase);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index", "Manage");
-            }
-        }
-
-        public async Task<ActionResult> Shop(Guid? idd, Purchase purchases)
+        public async Task<ActionResult> Shop(Guid? idd, Purchase purchase)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -141,10 +116,13 @@ namespace SmitairDOTNET.Controllers
             }
             else
             {
-                purchases.User = _context.Users.Where(us => us.Id == user.Id).Single();
-                purchases.Effect = _context.Effects.Where(effect => effect.EffectID == idd).Single();
+                purchase.User = _context.Users.Where(us => us.Id == user.Id).Single();
+                purchase.Effect = _context.Effects.Where(effect => effect.EffectID == idd).Single();
 
-                _context.Purchases.Add(purchases);
+                string effectCurrent = _context.Effects.Where(ef => ef.EffectID == idd).Single().EffectID.ToString();
+                purchase.Download = _store.UriForEffect(effectCurrent).ToString();
+
+                _context.Purchases.Add(purchase);
                 await _context.SaveChangesAsync();
 
                 purchased = true;

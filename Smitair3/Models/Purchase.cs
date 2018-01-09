@@ -16,6 +16,8 @@ namespace SmitairDOTNET.Models
         [ForeignKey("EffectId")]
         public Effect Effect { get; set; }
 
+        public string Download { get; set; }
+
         public int Grade { get; set; }
     }
 }

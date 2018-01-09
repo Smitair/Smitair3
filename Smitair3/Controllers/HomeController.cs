@@ -14,7 +14,7 @@ namespace SmitairDOTNET.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         public static bool loggedIn;
 
-        ImageStore _store = new ImageStore();
+        FileStore _store = new FileStore();
 
         public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -31,7 +31,7 @@ namespace SmitairDOTNET.Controllers
                 if (user.AvatarLink != null)
                 {
                     string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
-                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                    user.AvatarCurrent = _store.UriForImage(avatarcurrent).ToString();
                 }
             }
         }

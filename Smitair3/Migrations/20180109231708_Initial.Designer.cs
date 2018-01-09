@@ -11,7 +11,7 @@ using System;
 namespace Smitair3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180105212452_Initial")]
+    [Migration("20180109231708_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,6 +136,8 @@ namespace Smitair3.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("AvatarCurrent");
+
                     b.Property<string>("AvatarLink");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -217,6 +219,8 @@ namespace Smitair3.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("EffectCurrent");
+
                     b.Property<string>("EffectLink");
 
                     b.Property<string>("EffectName");
@@ -236,6 +240,8 @@ namespace Smitair3.Migrations
                 {
                     b.Property<Guid>("PurchaseID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Download");
 
                     b.Property<Guid?>("EffectId");
 

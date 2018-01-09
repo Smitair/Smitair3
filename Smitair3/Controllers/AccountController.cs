@@ -29,7 +29,7 @@ namespace Smitair3.Controllers
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _context;
 
-        ImageStore _store = new ImageStore();
+        FileStore _store = new FileStore();
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -54,7 +54,7 @@ namespace Smitair3.Controllers
                 if (user.AvatarLink != null)
                 {
                     string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
-                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                    user.AvatarCurrent = _store.UriForImage(avatarcurrent).ToString();
                 }
             }
         }

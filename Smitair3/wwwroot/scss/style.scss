@@ -296,6 +296,13 @@ body {
                 color: #FFFFFF;
             }
 
+            button {
+                border: 0px;
+                background-color: $left_color;
+                text-align: left;
+                padding: 0px;
+            }
+
             .list-group, .panel-group {
                 border-radius: 0px;
                 margin-left: 10px;
@@ -310,6 +317,13 @@ body {
 
                 .list-group-item:hover, .panel-heading:hover {
                     background-color: $hovercolor;
+
+                    button {
+                        border: 0px;
+                        background-color: $hovercolor;
+                        text-align: left;
+                        padding: 0px;
+                    }
                 }
             }
         }
