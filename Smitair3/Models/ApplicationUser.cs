@@ -12,6 +12,8 @@ namespace Smitair3.Models
     {
         public string AvatarLink { get; set; }
 
+        public string AvatarCurrent { get; set; }
+
         [Required]
         public string FirstName { get; set; }
         

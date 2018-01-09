@@ -27,6 +27,8 @@ namespace SmitairDOTNET.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private ApplicationDbContext _context;
 
+        ImageStore _store = new ImageStore();
+
         public PanelController(ApplicationDbContext context, IHostingEnvironment hosting,
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -39,6 +41,17 @@ namespace SmitairDOTNET.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             ViewBag.Panel = 1;
+
+            if (_userManager.GetUserId(User) != null)
+            {
+                var user = _context.Users.Where(us => us.Id == _userManager.GetUserId(User)).Single();
+
+                if (user.AvatarLink != null)
+                {
+                    string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
+                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                }
+            }
         }
 
         public ActionResult AddEffect()

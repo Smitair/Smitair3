@@ -12,7 +12,7 @@
             {
                 <li>
                     <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" class="user" style="padding:0px">
-                        <img src="@UserManager.GetUserAsync(User).Result.AvatarLink" class="avatar" />
+                        <img src="@UserManager.GetUserAsync(User).Result.AvatarCurrent" class="avatar" />
                     </a>
                 </li>
             }

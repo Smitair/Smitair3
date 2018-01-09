@@ -18,6 +18,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Sendgrid" Version="9.9.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\hosting\Effects\" />
-    <Folder Include="wwwroot\hosting\UsersAvatars\" />
   </ItemGroup>
 
 </Project>

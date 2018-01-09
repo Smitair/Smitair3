@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Security.Claims;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Smitair3.Data;
 
 namespace Smitair3.Controllers
 {
@@ -33,8 +34,10 @@ namespace Smitair3.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ApplicationDbContext _context;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+        ImageStore _store = new ImageStore();
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
@@ -42,7 +45,8 @@ namespace Smitair3.Controllers
           IHostingEnvironment hosting,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -50,11 +54,23 @@ namespace Smitair3.Controllers
             _hosting = hosting;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _context = context;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             ViewBag.Panel = 1;
+
+            if (_userManager.GetUserId(User) != null)
+            {
+                var user = _context.Users.Where(us => us.Id == _userManager.GetUserId(User)).Single();
+
+                if (user.AvatarLink != null)
+                {
+                    string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
+                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                }
+            }
         }
 
         [TempData]
@@ -119,15 +135,10 @@ namespace Smitair3.Controllers
                 }
             }
 
-            var uploads = Path.Combine(_hosting.WebRootPath, "hosting\\UsersAvatars\\" + user.UserName + ".jpg");
             if (file != null && file.Length > 0)
             {
-                using (FileStream fs = System.IO.File.Create(uploads))
-                {
-                    file.CopyTo(fs);
-                    fs.Flush();
-                }
-                user.AvatarLink = "/hosting/UsersAvatars/" + user.UserName + ".jpg";
+                var imageId = await _store.SaveImage(file.OpenReadStream());
+                user.AvatarLink = imageId;
             }
 
             user.FirstName = model.FirstName;
@@ -153,20 +164,6 @@ namespace Smitair3.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            ///////////////////////
-            //var apiKey = "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";
-            //var client = new SendGridClient(apiKey);
-            //var msg = new SendGridMessage()
-            //{
-            //    From = new EmailAddress("smitairadmin@smitair.com", "TestMessage"),
-            //    Subject = "Hello World from the SendGrid CSharp SDK!",
-            //    PlainTextContent = "Hello, Email!",
-            //    HtmlContent = "<strong>Hello, Email!</strong>"
-            //};
-            //msg.AddTo(new EmailAddress("marcin.horczak737@gmail.com", "Test User"));
-            //var response = await client.SendEmailAsync(msg);
-            ///////////////////
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);

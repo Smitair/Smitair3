@@ -15,6 +15,7 @@ using Smitair3.Models.AccountViewModels;
 using Smitair3.Services;
 using SmitairDOTNET.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Smitair3.Data;
 
 namespace Smitair3.Controllers
 {
@@ -26,17 +27,36 @@ namespace Smitair3.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
+
+        ImageStore _store = new ImageStore();
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (_userManager.GetUserId(User) != null)
+            {
+                var user = _context.Users.Where(us => us.Id == _userManager.GetUserId(User)).Single();
+
+                if (user.AvatarLink != null)
+                {
+                    string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
+                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                }
+            }
         }
 
         [TempData]

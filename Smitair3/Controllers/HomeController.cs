@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Smitair3.Data;
 using Smitair3.Models;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SmitairDOTNET.Controllers
 {
@@ -12,10 +14,26 @@ namespace SmitairDOTNET.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         public static bool loggedIn;
 
+        ImageStore _store = new ImageStore();
+
         public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if(_userManager.GetUserId(User) != null)
+            {
+                var user = _context.Users.Where(us => us.Id == _userManager.GetUserId(User)).Single();
+
+                if (user.AvatarLink != null)
+                {
+                    string avatarcurrent = _context.Users.Where(us => us.Id == user.Id).Single().AvatarLink;
+                    user.AvatarCurrent = _store.UriFor(avatarcurrent).ToString();
+                }
+            }
         }
 
         public IActionResult Index()
