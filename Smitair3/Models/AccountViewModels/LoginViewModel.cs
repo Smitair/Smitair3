@@ -8,10 +8,9 @@ namespace Smitair3.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        //Changed Mail to User
-        //[EmailAddress]
         public string UserName { get; set; }
+
+        public string EmailAdress { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

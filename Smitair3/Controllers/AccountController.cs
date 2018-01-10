@@ -83,17 +83,19 @@ namespace Smitair3.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
+                model.EmailAdress = model.UserName;
+                var resultEmail = await _signInManager.PasswordSignInAsync(model.EmailAdress, model.Password, model.RememberMe, lockoutOnFailure: true);
+                var resultUser = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
+                if (resultUser.Succeeded || resultEmail.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
-                if (result.RequiresTwoFactor)
+                if (resultUser.RequiresTwoFactor || resultEmail.RequiresTwoFactor)
                 {
                     return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
                 }
-                if (result.IsLockedOut)
+                if (resultUser.IsLockedOut || resultEmail.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
                     return RedirectToAction(nameof(Lockout));
